@@ -25,7 +25,7 @@ function deleteOne(index) {
   let arr = [];
   for (let i = 0; i < todos.length; i++) {
     if (i !== index) {
-      arr.push(todos(i));
+      arr.push(todos[i]);
     }
   }
   todos = arr;
@@ -80,8 +80,16 @@ function render() {
 
     //   DELETE
 
+    //delete button
+    const btnDelete = document.createElement("button");
+    btnDelete.innerText = "delete";
+    btnDelete.onclick = function () {
+      deleteOne(i);
+    };
+
     element.appendChild(titleEl);
     element.appendChild(btnEl);
+    element.appendChild(btnDelete);
     todolist.appendChild(element);
   }
 }
