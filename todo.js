@@ -22,6 +22,7 @@ function editName(index, name) {
 
 //Todo delete one item
 function deleteOne(index) {
+  console.log(index);
   let arr = [];
   for (let i = 0; i < todos.length; i++) {
     if (i !== index) {
@@ -54,7 +55,8 @@ function countDone() {
 // RUNNING APPLICATION
 
 function render() {
-  const todolist = document.querySelector("#tasks");
+  const todolist = document.querySelector("#todos");
+  const tasklist = todolist.querySelector("#tasks");
   todolist.innerHTML = "";
 
   console.log(todolist);
@@ -71,8 +73,8 @@ function render() {
     titleEl.innerText = item.name;
 
     //   create edit button
-    const btnEl = document.createElement("button");
-    btnEl.innerText = "Edit";
+    const btnEl = document.createElement("i");
+    btnEl.classList.add("fa-solid", "fa-pen");
     btnEl.onclick = function () {
       const newName = prompt("Enter new name");
       editName(i, newName);
@@ -80,22 +82,32 @@ function render() {
 
     //   DELETE
 
-    //delete button
-    const btnDelete = document.createElement("button");
-    btnDelete.innerText = "delete";
+    const btnDelete = document.createElement("i");
+    btnDelete.classList.add("fa-solid", "fa-trash");
     btnDelete.onclick = function () {
       deleteOne(i);
     };
 
+    todolist.appendChild(element);
     element.appendChild(titleEl);
     element.appendChild(btnEl);
     element.appendChild(btnDelete);
-    todolist.appendChild(element);
   }
 }
 
 function addTodo() {
-  const imput = prompt("Enter todo name");
-  addOne({ name: imput, status: "TODO" });
+  const modal = document.querySelector("#modal");
+  modal.style.display = "block";
+}
+function saveTodo() {
+  const inputValue = document.getElementById("task-name").value;
+  const statusValue = document.getElementById("task-status").value;
+
+  todos.push({
+    name: inputValue,
+    status: statusValue,
+  });
+  const modal = document.querySelector("#modal");
+  modal.style.display = "none";
   render();
 }

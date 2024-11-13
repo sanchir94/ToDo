@@ -137,33 +137,6 @@ button {
   position: absolute;
   right: 0;
 }
-#cd1 {
-  background-color: rgba(26, 26, 26, 1);
-  width: 340px;
-  height: 94px;
-  border-radius: 15px;
-}
-
-#cd2 {
-  background-color: rgba(26, 26, 26, 1);
-  width: 340px;
-  height: 94px;
-  border-radius: 15px;
-}
-
-#cd3 {
-  background-color: rgba(26, 26, 26, 1);
-  width: 340px;
-  height: 94px;
-  border-radius: 15px;
-}
-
-#cd4 {
-  background-color: rgba(26, 26, 26, 1);
-  width: 340px;
-  height: 94px;
-  border-radius: 15px;
-}
 
 #modal {
   position: fixed;
@@ -195,4 +168,7 @@ button {
 
 .modal-content > input {
   padding: 6px;
+}
+.task-style {
+  color: white;
 }

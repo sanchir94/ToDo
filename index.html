@@ -12,11 +12,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="todo.js"></script>
   </head>
   <body>
     <div id="button-container">
-      <button>Add task</button>
+      <button onclick="addTodo()">Add task</button>
     </div>
     <header>
       <div id="todo">
@@ -25,7 +24,7 @@
           <div id="text">To Do</div>
           <div id="mod">5</div>
         </div>
-        <div id="cd1"></div>
+        <div id="tasks" class="task-style"></div>
       </div>
       <div id="in-progress">
         <div id="inner">
@@ -33,7 +32,7 @@
           <div id="text">In Progress</div>
           <div id="mod">5</div>
         </div>
-        <div id="cd2"></div>
+        <div id="tasks" class="task-style"></div>
       </div>
       <div id="done">
         <div id="inner">
@@ -41,7 +40,6 @@
           <div id="text">Done</div>
           <div id="mod">5</div>
         </div>
-        <div id="cd3"></div>
       </div>
       <div id="blocked">
         <div id="inner">
@@ -49,15 +47,22 @@
           <div id="text">Blocked</div>
           <div id="mod">5</div>
         </div>
-        <div id="cd4"></div>
       </div>
       <div id="modal">
         <div class="modal-content">
           <h2>Enter task</h2>
-          <input type="text" id="taskName" />
-          <button onclick="saveTodo">Add task</button>
+          <input type="text" id="task-name" />
+
+          <select id="tasks-status">
+            <option value="todo">Todo</option>
+            <option value="in-progress">In-progress</option>
+            <option value="done">Done</option>
+            <option value="blocked">Blocked</option>
+          </select>
+          <button onclick="saveTodo()">Add task</button>
         </div>
       </div>
     </header>
+    <script src="todo.js"></script>
   </body>
 </html>
