@@ -18,36 +18,44 @@
       <button onclick="addTodo()">Add task</button>
     </div>
     <header>
-      <div id="todo">
-        <div id="inner">
-          <div id="round-shape"></div>
-          <div id="text">To Do</div>
-          <div id="mod">5</div>
-        </div>
-        <div id="tasks" class="task-style"></div>
-      </div>
-      <div id="in-progress">
-        <div id="inner">
-          <div id="round-shape"></div>
-          <div id="text">In Progress</div>
-          <div id="mod">5</div>
-        </div>
-        <div id="tasks" class="task-style"></div>
-      </div>
-      <div id="done">
-        <div id="inner">
-          <div id="round-shape"></div>
-          <div id="text">Done</div>
-          <div id="mod">5</div>
+      <div>
+        <div class="todo">
+          <div class="inner">
+            <div class="round-shape"></div>
+            <div class="text">To Do</div>
+          </div>
+
+          <div id="todo" class="task-style"></div>
         </div>
       </div>
-      <div id="blocked">
-        <div id="inner">
-          <div id="round-shape"></div>
-          <div id="text">Blocked</div>
-          <div id="mod">5</div>
+      <div>
+        <div class="in-progress">
+          <div class="inner">
+            <div class="round-shape"></div>
+            <div class="text">In Progress</div>
+          </div>
+
+          <div id="inprogress" class="task-style"></div>
         </div>
       </div>
+      <div>
+        <div class="done">
+          <div class="inner">
+            <div class="round-shape"></div>
+            <div class="text">Done</div>
+          </div>
+
+          <div id="done" class="task-style"></div>
+        </div>
+      </div>
+      <div class="blocked">
+        <div class="inner">
+          <div class="round-shape"></div>
+          <div class="text">Blocked</div>
+          <div id="blocked" class="task-style"></div>
+        </div>
+      </div>
+
       <div id="modal">
         <div class="modal-content">
           <h2>Enter task</h2>
@@ -59,7 +67,7 @@
             <option value="done">Done</option>
             <option value="blocked">Blocked</option>
           </select>
-          <button onclick="saveTodo()">Add task</button>
+          <button onclick="saveTodo()">Submit</button>
         </div>
       </div>
     </header>

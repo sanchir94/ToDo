@@ -38,7 +38,7 @@ button {
   color: rgba(255, 255, 255, 1);
   font-weight: 600;
 }
-#todo {
+.todo {
   background-color: rgba(16, 16, 16, 1);
   border: 1px solid rgba(51, 51, 51, 1);
   min-width: 380px;
@@ -48,7 +48,7 @@ button {
   padding-right: 20px;
 }
 
-#in-progress {
+.in-progress {
   background-color: rgba(16, 16, 16, 1);
   border: 1px solid rgba(51, 51, 51, 1);
   min-width: 380px;
@@ -58,7 +58,7 @@ button {
   padding-right: 20px;
 }
 
-#done {
+.done {
   background-color: rgba(16, 16, 16, 1);
   border: 1px solid rgba(51, 51, 51, 1);
   min-width: 380px;
@@ -68,7 +68,7 @@ button {
   border-radius: 25px;
 }
 
-#blocked {
+.blocked {
   background-color: rgba(16, 16, 16, 1);
   border: 1px solid rgba(51, 51, 51, 1);
   min-width: 380px;
@@ -78,14 +78,14 @@ button {
   padding-right: 20px;
 }
 
-#inner {
+.inner {
   width: 340px;
   height: 82px;
   margin-top: 20px;
   display: flex;
   position: relative;
 }
-#text {
+.text {
   width: 300px;
   height: 42px;
   display: flex;
@@ -96,7 +96,7 @@ button {
   color: rgba(255, 255, 255, 1);
 }
 
-#todo #round-shape {
+.todo .round-shape {
   width: 15px;
   height: 15px;
   background-color: rgba(217, 217, 217, 1);
@@ -104,7 +104,7 @@ button {
   margin-top: 4px;
 }
 
-#in-progress #round-shape {
+.in-progress .round-shape {
   width: 15px;
   height: 15px;
   background-color: rgba(163, 163, 0, 1);
@@ -112,7 +112,7 @@ button {
   margin-top: 4px;
 }
 
-#done #round-shape {
+.done .round-shape {
   width: 15px;
   height: 15px;
   background-color: rgba(0, 163, 0, 1);
@@ -120,14 +120,14 @@ button {
   margin-top: 4px;
 }
 
-#blocked #round-shape {
+.blocked .round-shape {
   width: 15px;
   height: 15px;
   background-color: rgba(163, 0, 0, 1);
   border-radius: 50%;
   margin-top: 4px;
 }
-#mod {
+/* .mod {
   width: 10px;
   height: 15px;
   font-size: 12px;
@@ -136,7 +136,7 @@ button {
   margin-top: 3px;
   position: absolute;
   right: 0;
-}
+} */
 
 #modal {
   position: fixed;
@@ -149,7 +149,7 @@ button {
   display: none;
 }
 
-.modal-open {
+#modal-open {
   display: block;
 }
 
@@ -171,4 +171,11 @@ button {
 }
 .task-style {
   color: white;
+}
+p {
+  color: white;
+  background-color: rgba(26, 26, 26, 1);
+  width: 340px;
+  height: 64px;
+  border-radius: 15px;
 }
