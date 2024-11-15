@@ -56,7 +56,7 @@ function countDone() {
 
 function render() {
   document.querySelector("#todo").innerHTML = "";
-  document.querySelector("#inprogress").innerHTML = "";
+  document.querySelector("#in-progress").innerHTML = "";
   document.querySelector("#done").innerHTML = "";
   document.querySelector("#blocked").innerHTML = "";
   for (let i = 0; i < todos.length; i++) {
@@ -76,6 +76,7 @@ function render() {
     btnEl.classList.add("fa-solid", "fa-pen");
     btnEl.onclick = function () {
       const newName = prompt("Enter new name");
+      element.classList.add("todo-item");
       editName(i, newName);
     };
 
