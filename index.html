@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>To-Do List</title>
     <link rel="icon" href="icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,68 +11,73 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="todo.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="button-container">
-      <button onclick="addTodo()">Add task</button>
+      <button onclick="openModal()">Add task</button>
     </div>
     <header>
-      <div>
-        <div class="todo">
-          <div class="inner">
-            <div class="round-shape"></div>
-            <div class="text">To Do</div>
-          </div>
-          <div id="todo" class="task-style"></div>
+      <div id="todo" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+        <div id="inner">
+          <div id="round-shape"></div>
+          <div id="t5">To Do</div>
+          <div id="num-todo">0</div>
         </div>
+        <div id="task-list-todo"></div>
       </div>
-
-      <div>
-        <div class="in-progress">
-          <div class="inner">
-            <div class="round-shape"></div>
-            <div class="text">In Progress</div>
-          </div>
-          <div id="in-progress" class="task-style"></div>
+      <div
+        id="in-progress"
+        ondrop="drop(event, 'in-progress')"
+        ondragover="allowDrop(event)"
+      >
+        <div id="inner">
+          <div id="round-shape"></div>
+          <div id="t5">In Progress</div>
+          <div id="num-in-progress">0</div>
         </div>
+        <div id="task-list-in-progress"></div>
       </div>
-
-      <div>
-        <div class="done">
-          <div class="inner">
-            <div class="round-shape"></div>
-            <div class="text">Done</div>
-          </div>
-          <div id="done" class="task-style"></div>
+      <div id="done" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+        <div id="inner">
+          <div id="round-shape"></div>
+          <div id="t5">Done</div>
+          <div id="num-done">0</div>
         </div>
+        <div id="task-list-done"></div>
       </div>
-
-      <div>
-        <div class="blocked">
-          <div class="inner">
-            <div class="round-shape"></div>
-            <div class="text">Blocked</div>
-          </div>
-          <div id="blocked" class="task-style"></div>
+      <div
+        id="blocked"
+        ondrop="drop(event, 'blocked')"
+        ondragover="allowDrop(event)"
+      >
+        <div id="inner">
+          <div id="round-shape"></div>
+          <div id="t5">Blocked</div>
+          <div id="num-blocked">0</div>
         </div>
+        <div id="task-list-blocked"></div>
       </div>
-
       <div id="modal">
-        <div class="modal-content">
+        <div id="modal-content">
           <h2>Enter task</h2>
-          <input type="text" id="task-name" />
-
-          <select id="tasks-status">
-            <option value="todo">Todo</option>
-            <option value="in-progress">In-progress</option>
+          <input type="text" id="text" placeholder="Task name..." />
+          <select id="status">
+            <option value="select">Select status</option>
+            <option value="todo">To Do</option>
+            <option value="in-progress">In Progress</option>
             <option value="done">Done</option>
             <option value="blocked">Blocked</option>
           </select>
-          <button onclick="saveTodo()">Submit</button>
+          <button onclick="submitTask()">Submit</button>
+          <span id="close-modal" onclick="closeModal()">X</span>
         </div>
       </div>
     </header>
-    <script src="todo.js"></script>
   </body>
 </html>

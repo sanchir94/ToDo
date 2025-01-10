@@ -37,57 +37,83 @@ button {
   align-items: center;
   color: rgba(255, 255, 255, 1);
   font-weight: 600;
+  border: none;
 }
-.todo {
+
+button:hover {
+  cursor: pointer;
+}
+
+#todo,
+#in-progress,
+#done,
+#blocked {
   background-color: rgba(16, 16, 16, 1);
   border: 1px solid rgba(51, 51, 51, 1);
   min-width: 380px;
-  min-height: 772px;
+  min-height: 850px;
   border-radius: 25px;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 }
 
-.in-progress {
-  background-color: rgba(16, 16, 16, 1);
-  border: 1px solid rgba(51, 51, 51, 1);
-  min-width: 380px;
-  min-height: 772px;
-  border-radius: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
+#todo #round-shape {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(217, 217, 217, 1);
+  border-radius: 50%;
+  margin-top: 4px;
 }
 
-.done {
-  background-color: rgba(16, 16, 16, 1);
-  border: 1px solid rgba(51, 51, 51, 1);
-  min-width: 380px;
-  min-height: 772px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 25px;
+#in-progress #round-shape {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(163, 163, 0, 1);
+  border-radius: 50%;
+  margin-top: 4px;
 }
 
-.blocked {
-  background-color: rgba(16, 16, 16, 1);
-  border: 1px solid rgba(51, 51, 51, 1);
-  min-width: 380px;
-  min-height: 772px;
-  border-radius: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
+#done #round-shape {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(0, 163, 0, 1);
+  border-radius: 50%;
+  margin-top: 4px;
 }
 
-.inner {
+#blocked #round-shape {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(163, 0, 0, 1);
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+#num-todo,
+#num-in-progress,
+#num-done,
+#num-blocked {
+  width: 10px;
+  height: 15px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  margin-top: 3px;
+  position: absolute;
+  right: 0;
+}
+
+#inner {
   width: 340px;
   height: 82px;
   margin-top: 20px;
   display: flex;
   position: relative;
 }
-.text {
-  width: 290px;
-  height: 48px;
+#t5 {
+  width: 300px;
+  height: 42px;
   display: flex;
   flex: 1;
   font-weight: 700;
@@ -96,91 +122,102 @@ button {
   color: rgba(255, 255, 255, 1);
 }
 
-.todo .round-shape {
-  width: 15px;
-  height: 15px;
-  background-color: rgba(217, 217, 217, 1);
-  border-radius: 50%;
-  margin-top: 4px;
+.task-card {
+  background-color: rgba(26, 26, 26, 1);
+  width: 340px;
+  height: 94px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
 }
 
-.in-progress .round-shape {
-  width: 15px;
-  height: 15px;
-  background-color: rgba(163, 163, 0, 1);
-  border-radius: 50%;
-  margin-top: 4px;
+.task-name {
+  color: white;
+  font-size: 16px;
+  flex-grow: 1;
 }
 
-.done .round-shape {
-  width: 15px;
-  height: 15px;
-  background-color: rgba(0, 163, 0, 1);
-  border-radius: 50%;
-  margin-top: 4px;
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 20px;
 }
 
-.blocked .round-shape {
-  width: 15px;
-  height: 15px;
-  background-color: rgba(163, 0, 0, 1);
-  border-radius: 50%;
-  margin-top: 4px;
+.task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.task-actions img {
+  width: 20px;
+  height: 20px;
 }
 
 #modal {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   z-index: 3;
   display: none;
 }
 
-#modal-open {
-  display: block;
-}
-
-.modal-content {
-  background-color: #1e1e1e;
-  margin: 100px auto;
-
+#modal-content {
+  width: 400px;
+  height: 410px;
+  border: 1px solid rgba(153, 153, 153, 1);
+  border-radius: 16px;
+  background-color: rgba(30, 30, 30, 1);
+  margin: 15% auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  padding: 12px;
-  color: white;
-  margin-top: 400px;
-  width: 370px;
-  height: 376px;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: relative;
 }
 
-.modal-content > input {
-  padding: 6px;
+#modal-content > h2 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
-.task-style {
+
+input,
+select {
+  width: 299px;
+  height: 49px;
+  border: 1px solid rgba(153, 153, 153, 1);
+  background-color: rgba(30, 30, 30, 1);
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 15px;
+  color: rgba(153, 153, 153, 1);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#modal-content > button {
+  width: 300px;
+  height: 50px;
+  margin-top: 100px;
+}
+#close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   color: white;
-}
-p {
-  color: white;
-  background-color: rgba(26, 26, 26, 1);
-  width: 340px;
-  height: 64px;
-  border-radius: 15px;
-}
-#tasks-status {
-  background-color: rgba(26, 26, 26, 1);
-  margin-bottom: 70px;
-  margin-top: 20px;
-  width: 290px;
-  height: 48px;
-}
-#task-name {
-  width: 290px;
-  height: 48px;
-  background-color: rgba(26, 26, 26, 1);
+  font-size: 20px;
+  cursor: pointer;
 }

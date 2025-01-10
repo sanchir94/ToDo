@@ -1,115 +1,112 @@
-const STATUS = "TODO" || "DONE";
+let taskToEdit = null;
 
-let todos = [];
+function openModal(task = null) {
+  document.getElementById("modal").style.display = "block";
+  const modalTitle = document.querySelector("#modal-content > h2");
 
-// todo add
-function addOne(newTodo) {
-  todos.push(newTodo);
-}
-
-// status uurchluh :func
-function editStatus(index, status) {
-  let item = todos[index];
-  item.status = status;
-}
-
-// Ner uurchilih :Func
-function editName(index, name) {
-  let item = todos[index];
-  item.name = name;
-  render();
-}
-
-//Todo delete one item
-function deleteOne(index) {
-  console.log(index);
-  let arr = [];
-  for (let i = 0; i < todos.length; i++) {
-    if (i !== index) {
-      arr.push(todos[i]);
-    }
-  }
-  todos = arr;
-  render();
-}
-
-// todo delete all
-function deleteAll() {
-  todos = [];
-  render();
-}
-
-// Count DONE
-function countDone() {
-  let count = 0;
-  for (let i = 0; i < todos.length; i++) {
-    let item = todos[i];
-    if (item.status === "DONE") {
-      count++;
-    }
-  }
-
-  return count;
-}
-
-// RUNNING APPLICATION
-
-function render() {
-  document.querySelector("#todo").innerHTML = "";
-  document.querySelector("#in-progress").innerHTML = "";
-  document.querySelector("#done").innerHTML = "";
-  document.querySelector("#blocked").innerHTML = "";
-  for (let i = 0; i < todos.length; i++) {
-    const todolist = document.querySelector("#" + todos[i].status);
-    const item = todos[i];
-
-    // create task item
-    const element = document.createElement("div");
-    element.classList.add("todo-item");
-
-    //   create task name
-    const titleEl = document.createElement("p");
-    titleEl.innerText = item.name;
-
-    //   create edit button
-    const btnEl = document.createElement("i");
-    btnEl.classList.add("fa-solid", "fa-pen");
-    btnEl.onclick = function () {
-      const newName = prompt("Enter new name");
-      element.classList.add("todo-item");
-      editName(i, newName);
-    };
-
-    //   DELETE
-
-    const btnDelete = document.createElement("i");
-    btnDelete.classList.add("fa-solid", "fa-trash");
-    btnDelete.onclick = function () {
-      deleteOne(i);
-    };
-
-    element.appendChild(titleEl);
-    element.appendChild(btnEl);
-    element.appendChild(btnDelete);
-
-    todolist.appendChild(element);
+  if (task) {
+    modalTitle.innerText = "Edit task";
+    document.getElementById("text").value =
+      task.querySelector(".task-name").innerText;
+    document.getElementById("status").value = task.dataset.status;
+    taskToEdit = task;
+  } else {
+    modalTitle.innerText = "Add task";
+    taskToEdit = null;
+    document.getElementById("text").value = "";
+    document.getElementById("status").value = "todo";
   }
 }
 
-function addTodo() {
-  const modal = document.querySelector("#modal");
-  modal.style.display = "block";
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
-function saveTodo() {
-  const inputValue = document.getElementById("task-name").value;
-  const statusValue = document.getElementById("tasks-status").value;
-  console.log(saveTodo);
 
-  todos.push({
-    name: inputValue,
-    status: statusValue,
+function submitTask() {
+  const taskName = document.getElementById("text").value;
+  const taskStatus = document.getElementById("status").value;
+
+  if (taskToEdit) {
+    taskToEdit.querySelector(".task-name").innerText = taskName;
+    const oldStatus = taskToEdit.dataset.status;
+    taskToEdit.dataset.status = taskStatus;
+
+    moveTaskToNewStatus(taskToEdit, oldStatus, taskStatus);
+  } else {
+    addTask(taskName, taskStatus);
+  }
+
+  closeModal();
+}
+
+function addTask(taskName, taskStatus) {
+  if (!taskName) return;
+
+  const taskCard = document.createElement("div");
+  taskCard.classList.add("task-card");
+  taskCard.dataset.status = taskStatus;
+  taskCard.setAttribute("draggable", true);
+  taskCard.innerHTML = `
+    <span class="task-name">${taskName}</span>
+    <div class="task-actions">
+      <button class="edit-btn">
+        <img src="edit.png" alt="Edit">
+      </button>
+      <button class="delete-btn">
+        <img src="delete.png" alt="Delete">
+      </button>
+    </div>
+  `;
+
+  taskCard
+    .querySelector(".edit-btn")
+    .addEventListener("click", () => openModal(taskCard));
+  taskCard
+    .querySelector(".delete-btn")
+    .addEventListener("click", () => deleteTask(taskCard));
+
+  taskCard.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("taskId", taskCard.dataset.status);
   });
-  const modal = document.querySelector("#modal");
-  modal.style.display = "none";
-  render();
+
+  const taskContainer = document.getElementById(`task-list-${taskStatus}`);
+  taskContainer.appendChild(taskCard);
+  updateTaskCount();
+}
+
+function deleteTask(taskCard) {
+  const status = taskCard.dataset.status;
+  taskCard.remove();
+  updateTaskCount();
+}
+
+function moveTaskToNewStatus(taskCard, oldStatus, newStatus) {
+  const oldContainer = document.getElementById(`task-list-${oldStatus}`);
+  oldContainer.removeChild(taskCard);
+
+  const newContainer = document.getElementById(`task-list-${newStatus}`);
+  newContainer.appendChild(taskCard);
+
+  updateTaskCount();
+}
+
+function updateTaskCount() {
+  const statuses = ["todo", "in-progress", "done", "blocked"];
+  statuses.forEach((status) => {
+    const taskContainer = document.getElementById(`task-list-${status}`);
+    const num = taskContainer ? taskContainer.children.length : 0;
+    document.getElementById(`num-${status}`).innerText = num;
+  });
+}
+
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+function drop(e, newStatus) {
+  e.preventDefault();
+  const taskId = e.dataTransfer.getData("taskId");
+  const taskCard = document.querySelector(`[data-status="${taskId}"]`);
+  taskCard.dataset.status = newStatus;
+  moveTaskToNewStatus(taskCard, taskId, newStatus);
 }
